@@ -10,8 +10,8 @@ CREATE TABLE rules (
 );
 
 CREATE TABLE roles_rules (
-    role_id BIGINT,
-    rule_id BIGINT,
+    role_id BIGINT REFERENCES roles(id),
+    rule_id BIGINT REFERENCES rules(id),
     PRIMARY KEY(role_id, rule_id)
 );
 
