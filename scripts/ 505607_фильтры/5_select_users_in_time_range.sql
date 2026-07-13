@@ -1,0 +1,5 @@
+SELECT id, name, email, created_at
+FROM	users
+WHERE created_at BETWEEN
+      TIMESTAMPTZ '2026-07-10 18:42:00+03'
+  AND TIMESTAMPTZ '2026-12-31 23:59:59+03';
