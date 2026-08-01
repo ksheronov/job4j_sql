@@ -19,13 +19,10 @@ SELECT
     o.id AS order_id,
     o.user_id,
     SUM(oi.quantity * oi.unit_price) AS total_amount,
-    SUM(SUM(oi.quantity * oi.unit_price)) OVER w AS user_total,
-    AVG(SUM(oi.quantity * oi.unit_price)) OVER w AS average_order_amount,
-    COUNT(*) OVER w AS orders_count
+    SUM(SUM(oi.quantity * oi.unit_price)) OVER(PARTITION BY o.user_id) AS user_total
 FROM orders o
 JOIN order_items oi ON o.id = oi.order_id
-GROUP BY o.id, o.user_id
-WINDOW w AS (PARTITION BY o.user_id);
+GROUP BY o.id, o.user_id;
 
 /*- для каждого заказа необходимо вывести:
 
